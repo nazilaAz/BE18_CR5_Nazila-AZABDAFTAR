@@ -8,14 +8,14 @@ session_start();
 // // if user will redirect to login
 // if (isset($_SESSION['user'])) {
 //     header("Location:reservetable/booktable.php");
-   
+
 // }elseif((isset($_SESSION['admin']))) {
 //     header("Location:menu/read.php");
 //     // echo "You dont have an access!!";
-   
+
 // }
 
-require_once "actions/db_connect.php";
+require_once "components/db_connect.php";
 require_once "components/file_upload.php";
 
 
@@ -29,17 +29,18 @@ function cleanInput($param)
     return $clean;
 }
 $fnameError = $lnameError = $dataError = $emailError = $passError = $emailloginError = $passLoginError = '';
-$first_name = $last_name = $email = $username = $pwd = '';
+$first_name = $last_name = $phone_number = $email = $address = $username = $pwd = '';
 $display = 'none';
 if (isset($_POST['register'])) {
     $error = false;
 
 
-    $first_name = cleanInput($_POST['firstname']);
-    $last_name = cleanInput($_POST['lastname']);
-    $date_of_birth = cleanInput($_POST['date-of-birth']);
+    $first_name = cleanInput($_POST['first_name']);
+    $last_name = cleanInput($_POST['last_name']);
+    $phone_number = cleanInput($_POST['phone_number']);
     $email = cleanInput($_POST['email']);
     $password = cleanInput($_POST['password']);
+    $address = cleanInput($_POST['address']);
 
     //Firstname validation
     if (empty($first_name)) {
@@ -85,11 +86,11 @@ if (isset($_POST['register'])) {
             $emailError = "This Email already exist!";
         }
     }
-    //Date of Birth
-    if (empty($date_of_birth)) {
+    //Phone-Number
+    if (empty($phone_number)) {
         $error = true;
         $display = 'block';
-        $dataError = "Please enter your date of Birth.";
+        $dataError = "Please enter your Phone.";
     }
     //Password Validation
     if (empty($password)) {
@@ -106,7 +107,7 @@ if (isset($_POST['register'])) {
     //create user to database
     $picture = file_upload($_FILES['picture'], "user");
     if (!$error) {
-        $strSql = "INSERT INTO `users`(`first_name`, `last_name`, `password`, `date_of_birth`, `email`, `picture`) 
+        $strSql = "INSERT INTO `user`(`first_name`, `last_name`, `email`, `password`, `phone_number`, `address`, `picture`) 
         VALUES ('$first_name','$last_name','$password','$date_of_birth','$email','$picture->fileName')";
         $resultsql = mysqli_query($connect, $strSql);
         if ($resultsql) {
@@ -134,7 +135,7 @@ if (isset($_POST['login'])) {
         $logindislay = 'block';
         $emailloginError = "Please Enter Valid Email Address!";
     } else {
-        $sqlStr = "SELECT email FROM users WHERE email='$email'";
+        $sqlStr = "SELECT email FROM user WHERE email='$email'";
         $res = mysqli_query($connect, $sqlStr);
 
         if (mysqli_num_rows($res) != 0) {
@@ -155,7 +156,7 @@ if (isset($_POST['login'])) {
     }
     if (!$loginError) {
         $pwd = hash("sha256", $pwd);
-        $strSqlLogin = "SELECT * FROM users WHERE email='$username' AND password='$pwd'";
+        $strSqlLogin = "SELECT * FROM user WHERE email='$username' AND password='$pwd'";
         $resultLogin = mysqli_query($connect, $strSqlLogin);
         $count = mysqli_num_rows($resultLogin);
         $rowLogin = mysqli_fetch_assoc($resultLogin);
@@ -164,10 +165,10 @@ if (isset($_POST['login'])) {
         if ($count == 1) {
             if ($rowLogin['status'] == 'admin') {
                 $_SESSION['admin'] = $rowLogin['id'];
-                header("Location:menu/read.php");
+                // header("Location:menu/read.php");
             } else {
                 $_SESSION['user'] = $rowLogin['id'];
-                header("Location:reservetable/booktable.php");
+                // header("Location:reservetable/booktable.php");
             }
         }
     }
@@ -185,13 +186,29 @@ if (isset($_POST['login'])) {
 
     <?php include "components/boot.php"; ?>
     <link rel="stylesheet" href="components/Css/login.css">
-
     <link rel="stylesheet" href="components/Css/style.css">
 
 </head>
 
 <body>
-    <?php include_once "components/navbar.php"; ?>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #C1A3A3;">
+        <div class="container-fluid">
+            <a class="navbar-brand txtFont" href="index.php">Adopt a Pet</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="read.php">Our meals</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <?php
         if (isset($msg)) {
@@ -216,7 +233,7 @@ if (isset($_POST['login'])) {
                         <!-- <div class="alert alert-danger" role="alert">
                             <?= $lnameError ?>
                         </div> -->
-                        <input type="date" name="date-of-birth">
+                        <input type="text" name="phone_number">
                         <!-- <div class="alert alert-danger" role="alert">
                             <?= $dataError ?>
                         </div> -->
@@ -229,6 +246,7 @@ if (isset($_POST['login'])) {
                             <?= $passError ?>
                         </div> -->
                         <!-- <input type="password" placeholder="confirm password"> -->
+                        <textarea class="form-control form-control-sm" rows="3" name="description" placeholder="note"></textarea> 
                         <input type="file" placeholder="Upload Image" name="picture">
                         <button type="submit" class="button submit" name="register">create account </button>
                     </form>
