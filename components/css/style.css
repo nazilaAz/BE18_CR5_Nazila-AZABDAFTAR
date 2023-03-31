@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Yanone+Kaffeesatz&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+
+body#home {
+  font-size: 16px;
+}
+body#home nav .txtFont {
+  font-family: "Righteous", cursive;
+}
+
+.container .read div.card img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}/*# sourceMappingURL=style.css.map */
