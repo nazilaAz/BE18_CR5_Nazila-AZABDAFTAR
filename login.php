@@ -31,12 +31,13 @@ function cleanInput($param)
 $fnameError = $lnameError = $dataError = $emailError = $passError = $emailloginError = $passLoginError = '';
 $first_name = $last_name = $phone_number = $email = $address = $username = $pwd = '';
 $display = 'none';
+
 if (isset($_POST['register'])) {
     $error = false;
 
 
-    $first_name = cleanInput($_POST['first_name']);
-    $last_name = cleanInput($_POST['last_name']);
+    $first_name = cleanInput($_POST['firstname']);
+    $last_name = cleanInput($_POST['lastname']);
     $phone_number = cleanInput($_POST['phone_number']);
     $email = cleanInput($_POST['email']);
     $password = cleanInput($_POST['password']);
@@ -76,7 +77,7 @@ if (isset($_POST['register'])) {
         $display = 'block';
         $emailError = "Please Enter Valid Email Address!";
     } else {
-        $sqlStr = "SELECT email FROM users WHERE email='$email'";
+        $sqlStr = "SELECT * FROM user WHERE email='$email'";
         $res = mysqli_query($connect, $sqlStr);
         // var_dump($res);
         // die();
@@ -108,7 +109,8 @@ if (isset($_POST['register'])) {
     $picture = file_upload($_FILES['picture'], "user");
     if (!$error) {
         $strSql = "INSERT INTO `user`(`first_name`, `last_name`, `email`, `password`, `phone_number`, `address`, `picture`) 
-        VALUES ('$first_name','$last_name','$password','$date_of_birth','$email','$picture->fileName')";
+        VALUES ('$first_name','$last_name','$email','$password','$phone_number','$address','$picture->fileName')";
+       
         $resultsql = mysqli_query($connect, $strSql);
         if ($resultsql) {
             $errType = 'success';
@@ -120,11 +122,10 @@ if (isset($_POST['register'])) {
             $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
         }
     }
-}
-
-//LOGIN Section
-$logindislay = 'none';
-if (isset($_POST['login'])) {
+}else if (isset($_POST['login'])) {
+ 
+    $display = 'none';
+    $logindislay = 'none';
     $loginError = false;
     $username = cleanInput($_POST['username']);
     $pwd = cleanInput($_POST['pwd']);
@@ -165,13 +166,19 @@ if (isset($_POST['login'])) {
         if ($count == 1) {
             if ($rowLogin['status'] == 'admin') {
                 $_SESSION['admin'] = $rowLogin['id'];
-                // header("Location:menu/read.php");
+                header("Location:senior.php");
             } else {
                 $_SESSION['user'] = $rowLogin['id'];
-                // header("Location:reservetable/booktable.php");
+                header("Location:home.php");
             }
         }
     }
+}else if(isset($_POST['signin'])) {
+    if($display = 'block'){
+        $display='none';
+    }
+   
+    $logindislay = 'none';
 }
 ?>
 <!DOCTYPE html>
@@ -229,11 +236,15 @@ if (isset($_POST['login'])) {
                         <!-- <div class="alert alert-danger" role="alert">
                             <?= $fnameError ?>
                         </div> -->
-                        <input type="text" placeholder="Lasttname" name="lastname" value="<?= $last_name ?>">
+                        <input type="text" placeholder="Lastname" name="lastname" value="<?= $last_name ?>">
                         <!-- <div class="alert alert-danger" role="alert">
                             <?= $lnameError ?>
                         </div> -->
-                        <input type="text" name="phone_number">
+                        <input type="text" placeholder="Phone"  name="phone_number">
+                        <!-- <div class="alert alert-danger" role="alert">
+                            <?= $dataError ?>
+                        </div> -->
+                        <input type="text" placeholder="Address"  name="address">
                         <!-- <div class="alert alert-danger" role="alert">
                             <?= $dataError ?>
                         </div> -->
@@ -246,8 +257,8 @@ if (isset($_POST['login'])) {
                             <?= $passError ?>
                         </div> -->
                         <!-- <input type="password" placeholder="confirm password"> -->
-                        <textarea class="form-control form-control-sm" rows="3" name="description" placeholder="note"></textarea> 
-                        <input type="file" placeholder="Upload Image" name="picture">
+                        <textarea rows="2" name="description" placeholder="note"></textarea> 
+                        <input type="file" name="picture">
                         <button type="submit" class="button submit" name="register">create account </button>
                     </form>
 
@@ -265,25 +276,25 @@ if (isset($_POST['login'])) {
             </div>
             <div class="leftbox">
                 <!-- <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2> -->
-                <h2 class="title"><span>Lorem</span>&<br>Restaurant</h2>
+                <h2 class="title"><span>Adop</span>a<br>PET</h2>
                 <!-- <p class="desc">pick your perfect <span>bouquet</span></p> -->
-                <img class="flower smaller rounded-circle" src="https://cdn.pixabay.com/photo/2018/07/14/15/27/cafe-3537801_960_720.jpg" alt="" border="0">
+                <img class="flower smaller rounded-circle" src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png" alt="" border="0">
                 <p class="account">have an account?</p>
-                <button class="button" id="signin">login</button>
+                <button type="button" class="button" id="signin" name="signin">login</button>
             </div>
 
             <div class="rightbox">
 
-                <h2 class="title"><span>Lorem</span>&<br>Restaurant</h2>
+                <h2 class="title"><span>Adop</span>a<br>PET</h2>
                 <!-- <p class="desc"> pick your perfect <span>bouquet</span></p> -->
-                <img class="flower rounded-circle" src="https://cdn.pixabay.com/photo/2021/03/16/10/04/street-6099209_960_720.jpg" />
+                <img class="flower rounded-circle" src="https://cdn.pixabay.com/photo/2018/10/01/09/21/pets-3715733__340.jpg" />
                 <p class="account">don't have an account?</p>
                 <button type="button" class="button" id="signup">sign up</button>
 
             </div>
 
 
-            <div class="rightbox">
+            <div class="rightbox error">
 
                 <div class="text-danger danger" style="display: <?= $display ?>;"><?= $fnameError ?></div>
                 <div class="text-danger danger" style="display: <?= $display ?>;"><?= $lnameError ?></div>

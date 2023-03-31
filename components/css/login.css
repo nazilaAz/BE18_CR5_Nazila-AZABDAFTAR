@@ -21,6 +21,11 @@ body {
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
+.welcome .error {
+  top: 6rem;
+  left: 21rem;
+  font-weight: 800;
+}
 
 .pinkbox {
   position: absolute;
@@ -28,7 +33,7 @@ body {
   left: 5%;
   background: #C1A3A3;
   width: 20rem;
-  height: 35rem;
+  height: 39rem;
   font-size: 0.8rem;
   border-radius: 5px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -90,8 +95,8 @@ h1 {
 }
 
 .account {
-  margin-top: 45%;
-  font-size: 10px;
+  margin-top: 55%;
+  font-size: 0.8rem;
 }
 
 p {
@@ -175,7 +180,8 @@ form {
   border-color: #3e2f42;
 }
 
-input {
+input,
+textarea {
   background: #C1A3A3;
   width: 65%;
   color: #986666;
@@ -184,29 +190,32 @@ input {
   padding: 9px;
   margin: 7px;
 }
-input::-moz-placeholder {
+input::-moz-placeholder, textarea::-moz-placeholder {
   color: #f6f6f6;
   letter-spacing: 2px;
   font-size: 1.3em;
   font-weight: 100;
 }
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: #f6f6f6;
   letter-spacing: 2px;
   font-size: 1.3em;
   font-weight: 100;
 }
-input:focus {
+input:focus,
+textarea:focus {
   color: #986666;
   outline: none;
   border-bottom: 1.2px solid rgba(152, 102, 102, 0.7);
   font-size: 1em;
   transition: 0.8s all ease;
 }
-input:focus::-moz-placeholder {
+input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
   opacity: 0;
 }
-input:focus::placeholder {
+input:focus::placeholder,
+textarea:focus::placeholder {
   opacity: 0;
 }
 
