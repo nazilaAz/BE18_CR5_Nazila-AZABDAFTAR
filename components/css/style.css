@@ -7,14 +7,40 @@
   box-sizing: 0;
 }
 
-body#home {
+body {
   font-size: 16px;
 }
-body#home nav .txtFont {
+body nav .txtFont {
   font-family: "Righteous", cursive;
 }
 
 .container .read div.card img {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+div#details {
+  background-color: #cababa;
+  margin-top: 5rem;
+  width: 70%;
+  border-radius: 10px;
+  padding: 2rem;
+}
+div#details .card {
+  margin: 1rem auto;
+}
+div#details .card a {
+  text-decoration: none;
+  font-weight: 500;
+}
+div#details .card .backImg {
+  width: 32px;
+  height: auto;
+}
+div#details .card img {
   width: 15rem;
   height: 15rem;
   border-radius: 50%;

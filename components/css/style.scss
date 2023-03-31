@@ -1,4 +1,9 @@
+$gray: #8E9AAF;
+$lavender: #4C3A51;
 $pale: #C1A3A3;
+$white: #f6f6f6;
+$pink: darken($pale, 20%);
+$lightPink: #cababa;
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +13,7 @@ $pale: #C1A3A3;
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Yanone+Kaffeesatz&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-body#home {
+body {
     font-size: 16px;
     nav {
         .txtFont {
@@ -27,6 +32,32 @@ body#home {
                 margin: 20px auto;
                 box-shadow: 0 0 10px rgba(0, 0, 0, .2);
             }
+        }
+    }
+}
+
+div#details {
+    background-color: $lightPink;
+    margin-top: 5rem;
+    width: 70%;
+    border-radius: 10px;
+    padding: 2rem;
+    .card {
+        margin: 1rem auto;
+        a {
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .backImg {
+            width: 32px;
+            height: auto;
+        }
+        img {
+            width: 15rem;
+            height: 15rem;
+            border-radius: 50%;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2);
         }
     }
 }

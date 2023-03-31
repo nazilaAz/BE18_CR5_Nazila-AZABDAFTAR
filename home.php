@@ -25,7 +25,7 @@ if (mysqli_num_rows($result)  > 0) {
         $card .= "
 
                 <div class='card mt-3 mx-3' style='width: 18rem;'>
-                        <img src='{$row['picture']}' class='card-img-top imgTop' alt='...'>
+                        <img src='pictures/{$row['picture']}' class='card-img-top imgTop' alt='...'>
                         <div class='card-body'>
                             <h5 class='card-title'>Name: {$row['name']}</h5>
                             <p class='card-text'>Breed: {$row['breed']} </p>
@@ -35,7 +35,7 @@ if (mysqli_num_rows($result)  > 0) {
                
                     <div class='card-footer text-center'>
                     <p class='card-text' style='color:$colortd;'> {$row['status']} </p>                        
-                        <button class='btn btn-warning btn-sm' id='center' style='color:white'>more...</button>           
+                        <a href='details.php?id={$row['id']}' role='button' class='btn btn-warning'>more...</a>         
                     </div>
                 </div>
         ";
