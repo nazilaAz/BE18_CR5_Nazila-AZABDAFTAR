@@ -148,7 +148,7 @@ mysqli_close($connect);
                         <img class="img-thumbnail userImage" src="../pictures/<?= $rowUser['picture']; ?>">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link rightLogin" href="logout.php?logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
+                        <a class="nav-link rightLogin" href="../logout.php?logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
                     </li>
 
                 </ul>
