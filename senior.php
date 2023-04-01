@@ -11,6 +11,8 @@ if (isset($_SESSION['admin'])) {
 }
 require_once "components/db_connect.php";
 require_once "components/file_upload.php";
+$res = mysqli_query($connect, "SELECT * FROM user WHERE id=" . $_SESSION['user']);
+$rowUser = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 $str = "SELECT * FROM `animal` WHERE `age` > 8";
 $result = mysqli_query($connect, $str);
@@ -63,6 +65,17 @@ if (mysqli_num_rows($result)  > 0) {
     <title>Senior</title>
     <?php include_once "components/boot.php"; ?>
     <link rel="stylesheet" href="components/Css/style.css">
+    <style>
+        .userImage {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .hero {
+            background: rgb(2, 0, 36);
+            background: linear-gradient(24deg, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 100%);
+        }
+    </style>
 </head>
 
 <body>
@@ -89,8 +102,18 @@ if (mysqli_num_rows($result)  > 0) {
             <div class="collapse navbar-collapse justify-content-end ps-5" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link rightLogin" href="login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        <a class="nav-link rightLogin">Hi, <?= $rowUser['first_name']; ?></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link rightLogin"><?= $rowUser['email']; ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <img class="img-thumbnail userImage" src="pictures/<?=$rowUser['picture'];?>" >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link rightLogin" href="logout.php?logout"><i class="bi bi-box-arrow-left"></i> Logout</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
