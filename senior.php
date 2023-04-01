@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
+    header("Location: index.php");
+    exit;
+}
+if (isset($_SESSION['admin'])) {
+    header("Location: adminPanel/dashboard.php");
+    exit;
+}
 require_once "components/db_connect.php";
 require_once "components/file_upload.php";
 

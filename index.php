@@ -1,19 +1,12 @@
 <?php
 session_start();
-// if session is not set this will redirect to login page
-// if (!isset($_SESSION['admin']) && !isset($_SESSION['user'])) {
-//     header("Location: ../login.php");
-//     exit;
-// }
-// // if user will redirect to login
-// if (isset($_SESSION['user'])) {
-//     header("Location:reservetable/booktable.php");
-
-// }elseif((isset($_SESSION['admin']))) {
-//     header("Location:menu/read.php");
-//     // echo "You dont have an access!!";
-
-// }
+if (isset($_SESSION['user']) != "") {
+    header("Location: home.php");
+    exit;
+}
+if (isset($_SESSION['admin']) != "") {
+    header("Location: adminPanel/dashboard.php"); // redirects to dashboard.php
+}
 
 require_once "components/db_connect.php";
 require_once "components/file_upload.php";
@@ -122,7 +115,7 @@ if (isset($_POST['register'])) {
             $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
         }
     }
-}else if (isset($_POST['login'])) {
+}elseif (isset($_POST['login'])) {
  
     $display = 'none';
     $logindislay = 'none';
@@ -166,19 +159,16 @@ if (isset($_POST['register'])) {
         if ($count == 1) {
             if ($rowLogin['status'] == 'admin') {
                 $_SESSION['admin'] = $rowLogin['id'];
-                header("Location:senior.php");
+                header("Location:adminPanel/dashboard.php");
             } else {
                 $_SESSION['user'] = $rowLogin['id'];
                 header("Location:home.php");
             }
         }
     }
-}else if(isset($_POST['signin'])) {
-    if($display = 'block'){
+}elseif(isset($_POST['signin'])) {
         $display='none';
-    }
-   
-    $logindislay = 'none';
+        $logindislay = 'none';
 }
 ?>
 <!DOCTYPE html>
@@ -206,9 +196,9 @@ if (isset($_POST['register'])) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="home.php">Home</a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="read.php">Our meals</a>
                     </li> -->
@@ -233,31 +223,12 @@ if (isset($_POST['register'])) {
                     <h1>sign up</h1>
                     <form autocomplete="off" action="<?= htmlspecialchars($_SERVER['SCRIPT_NAME']) ?>" method="POST" enctype="multipart/form-data">
                         <input type="text" placeholder="Firstname" name="firstname" value="<?= $first_name ?>">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $fnameError ?>
-                        </div> -->
                         <input type="text" placeholder="Lastname" name="lastname" value="<?= $last_name ?>">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $lnameError ?>
-                        </div> -->
                         <input type="text" placeholder="Phone"  name="phone_number">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $dataError ?>
-                        </div> -->
                         <input type="text" placeholder="Address"  name="address">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $dataError ?>
-                        </div> -->
                         <input type="email" placeholder="email" name="email" value="<?= $email ?>">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $emailError ?>
-                        </div> -->
                         <input type="password" placeholder="password" name="password">
-                        <!-- <div class="alert alert-danger" role="alert">
-                            <?= $passError ?>
-                        </div> -->
-                        <!-- <input type="password" placeholder="confirm password"> -->
-                        <textarea rows="2" name="description" placeholder="note"></textarea> 
+                        <textarea rows="2" name="description" placeholder="Your Message"></textarea> 
                         <input type="file" name="picture">
                         <button type="submit" class="button submit" name="register">create account </button>
                     </form>
@@ -270,26 +241,25 @@ if (isset($_POST['register'])) {
                         <span class="text-danger danger" style="display: <?= $logindislay ?>;"><?= $emailloginError ?></span>
                         <input type="password" placeholder="password" name="pwd">
                         <span class="text-danger danger" style="display: <?= $logindislay ?>;"><?= $passLoginError ?></span>
-                        <button class="button submit" type="submit" name="login">login</button>
+                        <button type="submit" class="button submit"  name="login">login</button>
                     </form>
                 </div>
             </div>
             <div class="leftbox">
-                <!-- <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2> -->
                 <h2 class="title"><span>Adop</span>a<br>PET</h2>
-                <!-- <p class="desc">pick your perfect <span>bouquet</span></p> -->
                 <img class="flower smaller rounded-circle" src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png" alt="" border="0">
                 <p class="account">have an account?</p>
-                <button type="button" class="button" id="signin" name="signin">login</button>
+                <form method="post">
+                    <button type="submit" class="button" id="signin" name="signin">login</button>
+                </form>
+                
             </div>
 
             <div class="rightbox">
-
                 <h2 class="title"><span>Adop</span>a<br>PET</h2>
-                <!-- <p class="desc"> pick your perfect <span>bouquet</span></p> -->
                 <img class="flower rounded-circle" src="https://cdn.pixabay.com/photo/2018/10/01/09/21/pets-3715733__340.jpg" />
                 <p class="account">don't have an account?</p>
-                <button type="button" class="button" id="signup">sign up</button>
+                <button type="submit" class="button" id="signup" name="signup">sign up</button>
 
             </div>
 
