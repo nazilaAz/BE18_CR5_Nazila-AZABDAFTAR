@@ -4,7 +4,7 @@ function file_upload($picture, $src = "user")
     $result = new stdClass(); //this object will carry status from file upload
     $result->fileName = 'userAvatar.png';
 
-    if($src !== "user"){
+    if($src == "pet"){
         $result->fileName = 'animalAvatar.jpg';
     }
 
@@ -27,7 +27,7 @@ function file_upload($picture, $src = "user")
                     //it gives a file name based microseconds
                     $fileNewName = uniqid('') . "." . $fileExtension; // 1233343434.jpg i.e
                     $destination = "pictures/$fileNewName";
-                    if($src == "product"){
+                    if($src == "pet"){
                         $destination = "../../pictures/$fileNewName";
                     }
                     if (move_uploaded_file($fileTmpName, $destination)) {

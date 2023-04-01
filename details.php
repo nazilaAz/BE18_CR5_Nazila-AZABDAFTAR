@@ -102,7 +102,19 @@ if (isset($_GET['id'])) {
             </div>
         </div>
 
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                   
+                    <span class="mb-3 mb-md-0 text-muted">&copy; PHP-Mysql Adop a Pet, CodeFactory</span>
+                </div>
 
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><i class="bi bi-twitter"></i></li>
+                    <li class="ms-3"><i class="bi bi-facebook"></i></li>
+                    <li class="ms-3"><i class="bi bi-instagram"></i></li>
+                    <li class="ms-3"><i class="bi bi-youtube"></i></li>
+                </ul>
+            </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
