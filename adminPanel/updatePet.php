@@ -29,7 +29,10 @@ if ($_GET['id']) {
         $description = $row['description'];
         $size = $row['size'];
         $age = $row['age'];
+
         $picture = $row['picture'];
+
+
         if ($row['status'] == 1) {
 
             $val = 1;
@@ -45,11 +48,11 @@ if ($_GET['id']) {
 
             $vacc = 1;
             $vaccinated = 'YES';
-            $colorspan = 'green';
+            $colorspanvacc = 'green';
         } else {
             $vacc = '';
             $vaccinated = 'NO';
-            $colorspan = 'red';
+            $colorspanvacc = 'red';
         }
 
     } else {
@@ -164,19 +167,20 @@ if ($_GET['id']) {
                         <td><textarea class="form-control" rows="3" name="description" placeholder="Description"><?= $description ?></textarea></td>
                     </tr>
                     <tr>
-                        <th>Vaccinated? <span style='color:<?= $colorspan ?>'><?= $vaccinated ?></span></th>
+                        <th>Vaccinated? <span style='color:<?= $colorspanvacc ?>'><?= $vaccinated ?></span></th>
                         <td><input type="checkbox" name="vaccinated" <?= ($vacc == 1) ? 'checked= checked' : ''; ?> /></td>
                     </tr>                   
                     <tr>
                         <th>Picture</th>
-                        <td><input class='form-control' type="file" name="picture" value="<?= $picture ?>" /></td>
+                        <td><input class='form-control' type="file" name="picture" /></td>
                     </tr>
                     <tr>
                         <th>Available? <span style='color:<?= $colorspan ?>'><?= $Ava ?></span></th>
                         <td><input type="checkbox" name="status" <?= ($val == 1) ? 'checked= checked' : ''; ?> /></td>
                     </tr>
                     <tr>
-                        <input type="hidden" name="id" value="<?= $id ?>" />
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>" />
+                        <input type= "hidden" name= "picture" value= "<?= $row['picture'] ?>" />
                         <td><button class="btn btn-success" type="submit">Save Changes</button></td>
                         <td></td>
                     </tr>

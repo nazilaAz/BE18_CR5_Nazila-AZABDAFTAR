@@ -10,7 +10,14 @@ if (isset($_SESSION["user"])) {
 
 require_once '../../components/db_connect.php';
 require_once '../../components/file_upload.php';
+function cleanInput($param)
+{
+    $clean = trim($param); //take spaces out!
+    $clean = strip_tags($clean); //take tags out!
+    $clean = htmlspecialchars($clean);
 
+    return $clean;
+}
 
 if ($_POST) {
     $error = false;

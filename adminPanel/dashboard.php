@@ -34,9 +34,6 @@ if (mysqli_num_rows($result) > 0) {
         <td>{$row['phone_number']}</td>
         <td>{$row['address']}</td>
         <td>{$row['status']}</td>
-         
-         <td><a href='update.php?id={$row['id']}' role='button' class='btn btn-warning'>Update</a></td>
-         <td><a href='delete.php?id={$row['id']}' role='button' class='btn btn-danger'>Delete</a></td>
     </tr>";
     }
 } else {
@@ -206,8 +203,8 @@ mysqli_close($connect);
                                 <th scope="col">Address</th>
                                 <th scope="col">Status</th>
 
-                                <th scope="col">Update</th>
-                                <th scope="col">Delete</th>
+                                <!-- <th scope="col">Update</th>
+                                <th scope="col">Delete</th> -->
                             </tr>
                         </thead>
                         <tbody>

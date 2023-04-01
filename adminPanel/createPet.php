@@ -15,7 +15,7 @@ $res = mysqli_query($connect, "SELECT * FROM user WHERE id=" . $_SESSION['admin'
 $rowUser = mysqli_fetch_array($res, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -82,76 +82,73 @@ $rowUser = mysqli_fetch_array($res, MYSQLI_ASSOC);
             </div>
         </div>
     </nav>
+
     <div class="container">
         <fieldset>
-            <legend class='h2'>New Pet</legend>
-            <form class="form-group" action="actions/a_creatPet.php" method="post" enctype="multipart/form-data">
-                <div class="row mb-3 pt-2">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-lg" placeholder="Name" name="name">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-lg" placeholder="Breed" name="breed">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-lg" placeholder="Where?" name="live">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-lg" placeholder="Description" name="description">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control form-control-lg" placeholder="Age" name="age">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <select class="form-select form-control-lg" aria-label="Default select example" name="size">
-                            <option selected>Size</option>
-                            <option value="Small">Small</option>
-                            <option value="Larg">Larg</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <select class="form-select form-control-lg" aria-label="Default select example" name="vaccinated">
-                            <option selected>Vaccinated</option>
-                            <option value="1">YES</option>
-                            <option value="0">NO</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <select class="form-select form-control-lg" aria-label="Default select example" name="status">
-                            <option selected>Status</option>
-                            <option value="1">Available</option>
-                            <option value="0">Adopted</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3 pb-3">
-                    <div class="col-sm-6">
-                        <input class="form-control form-control-lg" type="file" placeholder="Image" name="picture">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-8">
-                        <button type="submit" class="btn btn-info" name="submit">Add</button>
-                    </div>
-                </div>
+            <legend class='h2'>Create New</legend>
+
+            <form action="actions/a_creatPet.php" method="post" enctype="multipart/form-data">
+                <table class='table table-striped table-light'>
+                    <tr>
+                        <th>Name</th>
+                        <td><input type="text" class="form-control form-control-lg" placeholder="Name" name="name"></td>
+                    </tr>
+                    <tr>
+                        <th>Breed</th>
+                        <td><input type="text" class="form-control form-control-lg" placeholder="Breed" name="breed"></td>
+                    </tr>
+                    <tr>
+                        <th>Live</th>
+                        <td><input type="text" class="form-control form-control-lg" placeholder="Where?" name="live"></td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td><input type="number" class="form-control form-control-lg" placeholder="Age" name="age"></td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><textarea class="form-control" rows="3" placeholder="Description" name="description"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th>Size</th>
+                        <td><select class="form-select form-control-lg" aria-label="Default select example" name="size">
+                                <option selected>Size</option>
+                                <option value="Small">Small</option>
+                                <option value="Larg">Larg</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th>Vaccinated?</th>
+                        <td><select class="form-select form-control-lg" aria-label="Default select example" name="vaccinated">
+                                <option selected>Vaccinated</option>
+                                <option value="1">YES</option>
+                                <option value="0">NO</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th>Available?</th>
+                        <td><select class="form-select form-control-lg" aria-label="Default select example" name="status">
+                                <option selected>Status</option>
+                                <option value="1">Available</option>
+                                <option value="0">Adopted</option>
+                            </select></td>
+                    </tr>
+
+                    <tr>
+                        <th>Picture</th>
+                        <td> <input class="form-control form-control-lg" type="file" placeholder="Image" name="picture"></td>
+                    </tr>
+                   <tr>
+                        <td><button type="submit" class="btn btn-info" name="submit">Add</button></td>
+                        <td></td>
+                    </tr>
+                </table>
             </form>
+
         </fieldset>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 
 </html>
