@@ -1,8 +1,8 @@
 <?php
 
 $localhost = "173.212.235.205";
-$username = "nazilacodefactor_adminuser";
-$password = "Ham19219414@Adminuser";
+$username = "nazilacodefactor_adminuseradopt";
+$password = "Ham19219414Adminuser";
 $dbname = "nazilacodefactor_be18_cr5_animal_adoption_nazila-azabdaftar";
 // $localhost = "127.0.0.1";
 // $username = "root";
