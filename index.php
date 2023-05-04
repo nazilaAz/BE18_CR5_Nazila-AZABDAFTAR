@@ -24,6 +24,7 @@ function cleanInput($param)
 $fnameError = $lnameError = $dataError = $emailError = $passError = $emailloginError = $passLoginError = '';
 $first_name = $last_name = $phone_number = $email = $address = $username = $pwd = '';
 $display = 'none';
+$logindislay = 'none';
 
 if (isset($_POST['register'])) {
     $error = false;
