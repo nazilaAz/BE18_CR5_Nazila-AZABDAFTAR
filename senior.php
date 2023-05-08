@@ -64,7 +64,7 @@ if (mysqli_num_rows($result)  > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senior</title>
     <?php include_once "components/boot.php"; ?>
-    <link rel="stylesheet" href="components/Css/style.css">
+    <link rel="stylesheet" href="components/css/style.css">
     <style>
         .userImage {
             width: 3rem;

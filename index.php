@@ -177,14 +177,14 @@ if (isset($_POST['register'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>LOGIN</title>
 
     <?php include "components/boot.php"; ?>
-    <link rel="stylesheet" href="components/Css/login.css">
-    <link rel="stylesheet" href="components/Css/style.css">
+    <link rel="stylesheet" href="components/css/login.css">
+    <link rel="stylesheet" href="components/css/style.css">
 
 </head>
 
@@ -237,8 +237,10 @@ if (isset($_POST['register'])) {
                 </div>
                 <div class="signin">
                     <h1>sign in</h1>
+                    <p class="fs-6 text-light">azabdaftar@outlook.com <br> OR<br>test@test.com</p>
+                    <p class="fs-6 text-light">123123</p>
                     <form class="more-padding" autocomplete="off" action="<?= htmlspecialchars($_SERVER['SCRIPT_NAME']) ?>" method="POST">
-                        <input type="email" placeholder="username" name="username">
+                        <input type="email" placeholder="Username" name="username">
                         <span class="text-danger danger" style="display: <?= $logindislay ?>;"><?= $emailloginError ?></span>
                         <input type="password" placeholder="password" name="pwd">
                         <span class="text-danger danger" style="display: <?= $logindislay ?>;"><?= $passLoginError ?></span>
